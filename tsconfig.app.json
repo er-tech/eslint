@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+
+    "noEmit": false,
+
+    "emitDeclarationOnly": false,
+
+    "sourceMap": false,
+    "declaration": false,
+    "declarationMap": false,
+    "removeComments": true
+
+  },
+  "include": ["./src/**/*"],
+  "exclude": [
+    "./src/**/*.test.ts",
+    "./src/_jest/**"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build-tmp",
+
+    "module": "preserve",
+    "moduleResolution": "bundler",
+
+    "noEmit": false,
+
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+    "emitDeclarationOnly": false
+  },
+  "include": ["../**/*"],
+  "exclude": [
+    "../rollup"
+  ]
+}

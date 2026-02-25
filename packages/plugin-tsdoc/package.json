@@ -1,0 +1,25 @@
+{
+  "name": "@er/plugin-tsdoc",
+  "version": "1.0.0",
+  "description": "One lint config to rule them all",
+  "scripts": {
+    "update": "node ./rollup/run.mjs"
+  },
+  "bin": {
+    "auto": "./dist/_auto.js"
+  },
+  "files": [
+    "/dist"
+  ],
+  "author": "Eduardo Russo",
+  "license": "MIT",
+  "devDependencies": {
+  },
+  "overrides": {
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  }
+}
