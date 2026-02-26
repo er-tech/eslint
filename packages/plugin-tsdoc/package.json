@@ -1,5 +1,5 @@
 {
-  "name": "@er/plugin-tsdoc",
+  "name": "@er/eslint-plugin-tsdoc",
   "version": "1.0.0",
   "description": "One lint config to rule them all",
   "scripts": {
@@ -14,11 +14,14 @@
   "author": "Eduardo Russo",
   "license": "MIT",
   "devDependencies": {
+    "@microsoft/tsdoc": "^0.16.0"
   },
-  "overrides": {
-  },
-  "dependencies": {
-  },
+  "overrides": {},
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
   "peerDependencies": {
     "eslint": ">=9.0.0"
   }

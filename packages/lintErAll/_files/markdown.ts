@@ -1,4 +1,4 @@
 /** MARKDOWN files */
 export const markdown = [
-  '**/*.md',
+  '**/*.{md, mdx}',
 ]
