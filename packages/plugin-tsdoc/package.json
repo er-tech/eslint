@@ -14,7 +14,12 @@
   "author": "Eduardo Russo",
   "license": "MIT",
   "devDependencies": {
-    "@microsoft/tsdoc": "^0.16.0"
+    "@es-joy/jsdoccomment": "^0.84.0",
+    "@microsoft/tsdoc": "^0.16.0",
+    "@types/estree": "^1.0.8",
+    "@typescript-eslint/rule-tester": "^8.56.1",
+    "@typescript-eslint/utils": "^8.56.1",
+    "vitest": "^4.0.18"
   },
   "overrides": {},
   "keywords": [

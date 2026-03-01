@@ -1,6 +1,6 @@
 import typescript from '@rollup/plugin-typescript'
 import { ESLint } from 'eslint'
-import { readdirSync, readFileSync, rmSync } from 'node:fs'
+import { readFileSync, rmSync } from 'node:fs'
 import { rollup } from 'rollup'
 import { SingleBar } from 'cli-progress'
 import colours from 'ansi-colors'
@@ -13,7 +13,6 @@ class RollupSelfBuild {
   #lintErAllRoot = path.join(import.meta.dirname, '../')
   #inputPath = `${this.#lintErAllRoot}/index.ts`
 
-  ts = readdirSync(this.#lintErAllRoot)
   #buildFolder = `${this.#lintErAllRoot}/${JSON.parse(readFileSync(`${this.#lintErAllRoot}/tsconfig.json`)).compilerOptions.outDir}`
   #tsConfigPath = `${this.#lintErAllRoot}/tsconfig.json`
   #entryFileName = 'eslint.linterall.mjs'

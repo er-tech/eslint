@@ -1,5 +1,5 @@
 import { TSESLint } from '@typescript-eslint/utils'
-import { syntaxRule } from './rules/syntax/syntax.js'
+import { syntaxRule } from './rules/syntax/syntaxes.test.js'
 
 const plugin = {
   meta: {

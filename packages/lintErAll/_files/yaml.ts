@@ -1,5 +1,5 @@
 /** YAML files */
 export const yaml = [
-  '**/*.yaml',
-  '**/*.yml',
+  '*.yaml',
+  '*.yml',
 ]

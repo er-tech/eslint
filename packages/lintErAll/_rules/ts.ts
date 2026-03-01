@@ -351,7 +351,17 @@ export const lintErAll : Linter.RulesRecord = {
   ],
   'unicorn/prefer-top-level-await': 'off',
   'unicorn/prefer-module':          'off',
-  'unicorn/filename-case':          [
+  'unicorn/prevent-abbreviations':  [
+    'error',
+    {
+      ignore: [
+        /doc/i,
+        /dev/i,
+        /pro?d/i,
+      ],
+    },
+  ],
+  'unicorn/filename-case': [
     'error',
     {
       cases: {

@@ -12,6 +12,11 @@ newline-before-yield
 [] Have a simple config app where you have all configs
 [] Have another config where you can add all default configs you want off
 
+## TSDoc Plugin
+https://github.com/eslint-community/eslint-plugin-rulesdir
+https://typescript-eslint.io/developers/eslint-plugins
+
+
 ## Other plugins
 
 https://www.npmjs.com/package/eslint-plugin-jsx-a11y

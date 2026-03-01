@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "ER monorepo with ESLint packages",
   "scripts": {
-    "linterall:update": "npm run -w @er/linterall update"
+    "linterall:update": "npm run -w @er/linterall update",
+    "lint": "eslint -c eslint.config.mjs"
   },
   "author": "Eduardo Russo",
   "license": "MIT",
