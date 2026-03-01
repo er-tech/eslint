@@ -682,7 +682,7 @@ const yaml = {
 /**
  * All configs. This is the main export of the configs module, and includes all the individual configs for different file types and purposes. Each config is designed to be used with ESLint's flat config system, and can be extended or customized as needed. The configs are organized by file type (e.g., ts for TypeScript, json for JSON files) and by purpose (e.g., standard for standard style guide, lintErAll for more opinionated rules). The global ignores config is applied to all configs to ensure that certain files are always ignored regardless of the specific config being used.
  */
-const _config = {
+const _configs = {
   recommended: [
     ignores,
     json,
@@ -757,15 +757,15 @@ const lintErAllObject = {
   /**
     * All LintErAll configs for each file type and purpose. This includes configs for TypeScript, JSON, YAML and global ignores. Each config is designed to be used with __ESLint's flat config__ system, and can be extended or customized as needed.
      */
-  config: _config,
+  configs: _configs,
   /**
      * File patterns for different types of files (e.g., TypeScript, JavaScript, tests) that can be used in ESLint configurations or scripts.
     */
-  files:  _files,
+  files:   _files,
   /**
      * All LintErAll rules separated by type
      */
-  rules:  _rules,
+  rules:   _rules,
 }
 function callLintErAll (_configs) {
   // return configs and set rules
@@ -776,7 +776,7 @@ function createLintErAll () {
   // Make the function callable
   const function_ = callLintErAll.bind('')
   // Attach properties (like Axios does)
-  function_.config = _config
+  function_.configs = _configs
   function_.files = _files
   function_.rules = _rules
 

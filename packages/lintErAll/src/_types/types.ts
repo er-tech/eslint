@@ -49,7 +49,7 @@ export type LintErAllFiles = {
   markdown: string[],
 }
 export type LintErAll = {
-  config: LintErAllConfigs,
+  configs: LintErAllConfigs,
   files: LintErAllFiles,
   rules: LintErAllRules,
 }

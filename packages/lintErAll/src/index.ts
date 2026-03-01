@@ -1,4 +1,4 @@
-import { _config } from './_configs'
+import { _configs } from './_configs'
 import { _files } from './_files'
 import { CallableObject, LintErAll } from './_types'
 import { _rules } from './_rules'
@@ -10,7 +10,7 @@ export const lintErAllObject: LintErAll = {
   /**
   * All LintErAll configs for each file type and purpose. This includes configs for TypeScript, JSON, YAML and global ignores. Each config is designed to be used with __ESLint's flat config__ system, and can be extended or customized as needed.
    */
-  config: _config,
+  configs: _configs,
   /**
    * File patterns for different types of files (e.g., TypeScript, JavaScript, tests) that can be used in ESLint configurations or scripts.
   */
@@ -33,7 +33,7 @@ function createLintErAll () {
   const function_: CallableObject = callLintErAll.bind('') as any
 
   // Attach properties (like Axios does)
-  function_.config = _config
+  function_.configs = _configs
   function_.files = _files
   function_.rules = _rules
 
