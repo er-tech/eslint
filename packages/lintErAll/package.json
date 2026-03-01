@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "One lint config to rule them all",
   "scripts": {
-    "update": "node ./rollup/run.mjs"
+    "update": "node ./rollup.mjs",
+    "build": "tsc -p tsconfig.json"
   },
   "bin": {
     "auto": "./dist/_auto.js"

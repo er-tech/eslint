@@ -6,15 +6,16 @@ import { SingleBar } from 'cli-progress'
 import colours from 'ansi-colors'
 import path from 'node:path'
 import { defineConfig } from 'eslint/config'
-import { lintErAll } from '../../../eslint.linterall.mjs'
+import { lintErAll } from '../../eslint.linterall.mjs'
 
 class RollupSelfBuild {
-  #root = path.join(import.meta.dirname, '../../../')
-  #lintErAllRoot = path.join(import.meta.dirname, '../')
-  #inputPath = `${this.#lintErAllRoot}/index.ts`
+  #root = path.join(import.meta.dirname, '../..')
+  #srcRoot = path.join(import.meta.dirname, 'src')
+  #inputPath = path.join(this.#srcRoot, 'index.ts')
 
-  #buildFolder = `${this.#lintErAllRoot}/${JSON.parse(readFileSync(`${this.#lintErAllRoot}/tsconfig.json`)).compilerOptions.outDir}`
-  #tsConfigPath = `${this.#lintErAllRoot}/tsconfig.json`
+  #tsConfigPath = path.join(import.meta.dirname, 'tsconfig.json')
+  #tsConfig = JSON.parse(readFileSync(this.#tsConfigPath, 'utf8'))
+  #buildFolder = path.join(import.meta.dirname, this.#tsConfig.compilerOptions.outDir)
   #entryFileName = 'eslint.linterall.mjs'
   #outputPath = path.join(this.#root, this.#entryFileName)
   #steps = [

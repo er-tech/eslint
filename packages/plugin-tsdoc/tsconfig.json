@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "./build-tmp",
+    "outDir": "../../dist/plugin-tsdoc",
 
     "module": "preserve",
     "moduleResolution": "bundler",
