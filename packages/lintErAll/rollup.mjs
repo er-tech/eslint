@@ -16,7 +16,7 @@ class RollupSelfBuild {
   #tsConfigPath = path.join(import.meta.dirname, 'tsconfig.json')
   #tsConfig = JSON.parse(readFileSync(this.#tsConfigPath, 'utf8'))
   #buildFolder = path.join(import.meta.dirname, this.#tsConfig.compilerOptions.outDir)
-  #entryFileName = 'eslint.linterall.mjs'
+  #entryFileName = 'eslint.lintErAll.mjs'
   #outputPath = path.join(this.#root, this.#entryFileName)
   #steps = [
     'loading external dependencies',
@@ -54,6 +54,8 @@ class RollupSelfBuild {
     await this.#writeBundle()
     this.#cleanBuild()
     await this.#lintResult()
+
+    console.log(colours.green('eslint.lintErAll.mjs updated!'))
   }
 
   * #barGenerator () {
@@ -129,7 +131,7 @@ class RollupSelfBuild {
     const eslint = new ESLint({
       fix:        true,
       baseConfig: defineConfig([
-        ...lintErAll.config.recommended,
+        ...lintErAll.configs.recommended,
       ]),
     })
 

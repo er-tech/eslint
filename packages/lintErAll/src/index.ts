@@ -69,4 +69,4 @@ function createLintErAll () {
  * }} LintErAll
  */
 
-export const lintErAll = createLintErAll()
+      export const lintErAll = createLintErAll()

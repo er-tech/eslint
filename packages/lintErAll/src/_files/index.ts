@@ -5,42 +5,42 @@
 export const _files = {
   /** TypeScript and Javascript files */
   ts: [
-    '*.{ts,mts,cts}',
-    '*.{tsx,mtsx,ctsx}',
-    '*.{js,mjs,cjs}',
-    '*.{jsx,mjsx,cjsx}',
+    '**/*.{ts,mts,cts}',
+    '**/*.{tsx,mtsx,ctsx}',
+    '**/*.{js,mjs,cjs}',
+    '**/*.{jsx,mjsx,cjsx}',
   ],
   /** TypeScript and JavaScript test files */
   tsTest: [
-    '*.{test,spec}.{ts,mts,cts}',
-    '*.{test,spec}.{tsx,mtsx,ctsx}',
-    '*.{test,spec}.{js,mjs,cjs}',
-    '*.{test,spec}.{jsx,mjsx,cjsx}',
+    '**/*.{test,spec}.{ts,mts,cts}',
+    '**/*.{test,spec}.{tsx,mtsx,ctsx}',
+    '**/*.{test,spec}.{js,mjs,cjs}',
+    '**/*.{test,spec}.{jsx,mjsx,cjsx}',
   ],
   /** JSON, JSONC and JSON5 files */
   json: {
     /** JSON files */
     json: [
-      '*.json',
+      '**/*.json',
     ],
     /** JSONC files */
     jsonc: [
-      '*.jsonc',
+      '**/*.jsonc',
     ],
     /** JSON5 and VSCode config files */
     json5: [
-      '*.json5',
-      '*.code-workspace',
-      './.vscode/*.json',
+      '**/*.json5',
+      '**/*.code-workspace',
+      './.vscode/**/*.json',
     ],
   },
   /** YAML files */
   yaml: [
-    '*.yaml',
-    '*.yml',
+    '**/*.yaml',
+    '**/*.yml',
   ],
   /** MARKDOWN files */
   markdown: [
-    '*.md',
+    '**/*.md',
   ],
 }
