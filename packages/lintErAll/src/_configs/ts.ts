@@ -7,6 +7,8 @@ import pluginReactRefresh from 'eslint-plugin-react-refresh'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import globalsConfig from 'globals'
 import pluginTypescript from 'typescript-eslint'
+import pluginJest from 'eslint-plugin-jest'
+
 import { _rules } from '../_rules'
 import { _files } from '../_files'
 import { type ConfigWithExtends } from '@eslint/config-helpers'
@@ -27,6 +29,18 @@ const standardExtends = [
     rules:   _rules.ts.standard,
   },
 ]
+
+const lintErAllExtends = [
+  ...standardExtends,
+  ...pluginTypescript.configs.stylisticTypeChecked,
+  ...pluginTypescript.configs.recommended,
+  pluginReactHooks.configs.flat.recommended,
+  eslintPluginUnicorn.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  pluginReactHooks.configs.flat.recommended,
+  pluginReactRefresh.configs.recommended,
+]
+
 export const standard: ConfigWithExtends = {
   name:            'Standard Config',
   files:           _files.ts,
@@ -54,23 +68,19 @@ export const lintErAll: ConfigWithExtends = {
       version: '19.2',
     },
   },
-  extends: [
-    ...standardExtends,
-    ...pluginTypescript.configs.stylisticTypeChecked,
-    ...pluginTypescript.configs.recommended,
-    pluginReactHooks.configs.flat.recommended,
-    eslintPluginUnicorn.configs.recommended,
-    pluginReact.configs.flat.recommended,
-    pluginReactHooks.configs.flat.recommended,
-    pluginReactRefresh.configs.recommended,
-  ],
-  rules: _rules.ts.lintErAll,
+  extends: lintErAllExtends,
+  rules:   _rules.ts.lintErAll,
 }
 
 export const lintErAllTest: ConfigWithExtends = {
   ...lintErAll,
-  name:  'LintErAll Tests Config',
-  files: _files.tsTest,
+  name:    'LintErAll Tests Config',
+  files:   _files.tsTest,
+  ignores: [],
+  extends: [
+    ...lintErAllExtends,
+    pluginJest.configs['flat/all'],
+  ],
   rules: _rules.ts.lintErAllTest,
 
 }

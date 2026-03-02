@@ -8,7 +8,7 @@ export const rule = createRule({
   create: (context) => {
     const checkFunction = (
       node: TSESTree.FunctionDeclaration | TSESTree.ArrowFunctionExpression,
-      options: { checkMissingDestructured?: boolean }
+      options: { checkMissingDestructured?: boolean },
     ):
       | RuleFunction<TSESTree.FunctionDeclaration | TSESTree.ArrowFunctionExpression>
       | undefined => {
@@ -19,18 +19,18 @@ export const rule = createRule({
 
       const tokenBeforeTsDoc =
         node.type === TSESTree.AST_NODE_TYPES.FunctionDeclaration
-          ? tokensBefore[0]?.value === 'export'
-            ? // Get the `export` token for function declarations.
+          ? (tokensBefore[0]?.value === 'export'
+              ? // Get the `export` token for function declarations.
               tokensBefore[0]
-            : // Get the `function` token for function declarations.
-              sourceCode.getFirstToken(node)
+              : // Get the `function` token for function declarations.
+              sourceCode.getFirstToken(node))
           : tokensBefore[3]?.value === 'export'
-          ? // Get the `export` token for arrow functions.
+            ? // Get the `export` token for arrow functions.
             tokensBefore[3]
-          : ['let', 'var', 'const'].includes(tokensBefore[2].value)
-          ? // Get the `let`, `var`, `const` token for arrow functions.
-            tokensBefore[2]
-          : null
+            : ['let', 'var', 'const'].includes(tokensBefore[2].value)
+                ? // Get the `let`, `var`, `const` token for arrow functions.
+                tokensBefore[2]
+                : null
 
       if (!tokenBeforeTsDoc) {
         return
@@ -56,84 +56,84 @@ export const rule = createRule({
         return self.indexOf(value) !== index
       })
 
-      duplicateParamNamesFromTsDoc.forEach((paramName) => {
+      for (const parameterName of duplicateParamNamesFromTsDoc) {
         context.report({
-          node: commentNode,
+          node:      commentNode,
           messageId: 'duplicateParam',
-          data: { paramName },
+          data:      { paramName: parameterName },
         })
-      })
+      }
 
-      const paramNamesFromFunction: string[] = []
+      const parameterNamesFromFunction: string[] = []
 
-      node.params.forEach((parameter) => {
+      for (const parameter of node.params) {
         if (parameter.type === TSESTree.AST_NODE_TYPES.Identifier) {
-          paramNamesFromFunction.push(parameter.name)
+          parameterNamesFromFunction.push(parameter.name)
         } else if (
           parameter.type === TSESTree.AST_NODE_TYPES.AssignmentPattern &&
           parameter.left.type === TSESTree.AST_NODE_TYPES.Identifier
         ) {
-          paramNamesFromFunction.push(parameter.left.name)
+          parameterNamesFromFunction.push(parameter.left.name)
         }
-      })
+      }
 
       // Check for missing parameter names.
-      paramNamesFromFunction.forEach((paramName) => {
-        if (!paramNamesFromTsDoc.includes(paramName)) {
+      for (const parameterName of parameterNamesFromFunction) {
+        if (!paramNamesFromTsDoc.includes(parameterName)) {
           context.report({
-            node: commentNode,
+            node:      commentNode,
             messageId: 'missingParam',
-            data: { paramName },
+            data:      { paramName: parameterName },
           })
         }
-      })
+      }
 
-      const destructuredParamsCount = node.params.filter(
-        (parameter) => parameter.type === TSESTree.AST_NODE_TYPES.ObjectPattern
+      const destructuredParametersCount = node.params.filter(
+        (parameter) => parameter.type === TSESTree.AST_NODE_TYPES.ObjectPattern,
       ).length
 
-      if (!destructuredParamsCount) {
+      if (destructuredParametersCount) {
+        // Check for destructured parameters.
+        const unmatchedParameterNames = paramNamesFromTsDoc.filter(
+          (parameterName) => !parameterNamesFromFunction.includes(parameterName),
+        )
+        const unmatchedParameterNamesCount = unmatchedParameterNames.length
+        if (unmatchedParameterNamesCount > destructuredParametersCount) {
+          context.report({
+            node:      commentNode,
+            messageId: 'excessDestructuredParam',
+            data:      {
+              count:         destructuredParametersCount,
+              got:           unmatchedParameterNamesCount,
+              unmatchedTags: unmatchedParameterNames.join(', '),
+            },
+          })
+        } else if (checkMissingDestructured && unmatchedParameterNamesCount < destructuredParametersCount) {
+          context.report({
+            node:      commentNode,
+            messageId: 'missingDestructuredParam',
+            data:      {
+              count: destructuredParametersCount,
+              got:   unmatchedParameterNamesCount,
+            },
+          })
+        }
+      } else {
         // Check for invalid parameters names.
-        paramNamesFromTsDoc.forEach((paramName) => {
-          if (!paramNamesFromFunction.includes(paramName)) {
+        for (const parameterName of paramNamesFromTsDoc) {
+          if (!parameterNamesFromFunction.includes(parameterName)) {
             context.report({
-              node: commentNode,
+              node:      commentNode,
               messageId: 'invalidParam',
-              data: { paramName },
+              data:      { paramName: parameterName },
             })
           }
-        })
-      } else {
-        // Check for destructured parameters.
-        const unmatchedParamNames = paramNamesFromTsDoc.filter(
-          (paramName) => !paramNamesFromFunction.includes(paramName)
-        )
-        const unmatchedParamNamesCount = unmatchedParamNames.length
-        if (unmatchedParamNamesCount > destructuredParamsCount) {
-          context.report({
-            node: commentNode,
-            messageId: 'excessDestructuredParam',
-            data: {
-              count: destructuredParamsCount,
-              got: unmatchedParamNamesCount,
-              unmatchedTags: unmatchedParamNames.join(', '),
-            },
-          })
-        } else if (checkMissingDestructured && unmatchedParamNamesCount < destructuredParamsCount) {
-          context.report({
-            node: commentNode,
-            messageId: 'missingDestructuredParam',
-            data: {
-              count: destructuredParamsCount,
-              got: unmatchedParamNamesCount,
-            },
-          })
         }
       }
     }
 
     return {
-      FunctionDeclaration: (node) => checkFunction(node, context.options[0] ?? {}),
+      FunctionDeclaration:     (node) => checkFunction(node, context.options[0] ?? {}),
       ArrowFunctionExpression: (node) => checkFunction(node, context.options[0] ?? {}),
     }
   },
@@ -153,13 +153,13 @@ export const rule = createRule({
       excessDestructuredParam:
         'Mismatch in number of TSDoc @param tags for destructured parameters. Expected {{count}} but got {{got}}. Please remove the following @param tags: {{unmatchedTags}}.',
     },
-    type: 'problem',
+    type:   'problem',
     schema: [
       {
-        type: 'object',
+        type:       'object',
         properties: {
           checkMissingDestructured: {
-            type: 'boolean',
+            type:        'boolean',
             description: 'Check for missing destructured parameters in TSDoc comments.',
           },
         },

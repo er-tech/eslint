@@ -6,7 +6,6 @@ import { SingleBar } from 'cli-progress'
 import colours from 'ansi-colors'
 import path from 'node:path'
 import { defineConfig } from 'eslint/config'
-import { lintErAll } from '../../eslint.linterall.mjs'
 
 class RollupSelfBuild {
   #root = path.join(import.meta.dirname, '../..')
@@ -127,6 +126,7 @@ class RollupSelfBuild {
   }
 
   async #lintResult () {
+    const { lintErAll } = await import('../../eslint.lintErAll.mjs')
     this.#updateBar()
     const eslint = new ESLint({
       fix:        true,

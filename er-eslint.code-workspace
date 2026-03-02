@@ -10,7 +10,7 @@
       ".editorconfig": true,
       "package-lock.json": true,
       "typedoc.json": true,
-      "jest.config.js": true,
+      // "jest.config.js": true,
       // "tsconfig.*": true,
     },
     "cSpell.words": [

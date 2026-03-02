@@ -14,11 +14,11 @@ export const lintErAllObject: LintErAll = {
   /**
    * File patterns for different types of files (e.g., TypeScript, JavaScript, tests) that can be used in ESLint configurations or scripts.
   */
-  files:  _files,
+  files:   _files,
   /**
    * All LintErAll rules separated by type
    */
-  rules:  _rules,
+  rules:   _rules,
 }
 
 export function callLintErAll (_configs: any) {
@@ -69,4 +69,4 @@ function createLintErAll () {
  * }} LintErAll
  */
 
-      export const lintErAll = createLintErAll()
+export const lintErAll = createLintErAll()

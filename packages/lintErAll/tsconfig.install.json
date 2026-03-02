@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "../../dist/linterall",
+
+    "noEmit": false,
+
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+    "emitDeclarationOnly": false
+  },
+  "include": ["./**/*"]
+}

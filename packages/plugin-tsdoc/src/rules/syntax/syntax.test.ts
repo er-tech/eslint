@@ -1,13 +1,16 @@
 import path from 'node:path'
 import tseslint from 'typescript-eslint'
 import { RuleTester } from '@typescript-eslint/rule-tester'
-import * as vitest from 'vitest'
-import { syntaxRule } from './syntaxes.test'
+import { syntaxRule } from './syntax'
+import { readFileSync } from 'node:fs'
 
-RuleTester.afterAll = vitest.afterAll
-RuleTester.it = vitest.it
-RuleTester.itOnly = vitest.it.only
-RuleTester.describe = vitest.describe
+RuleTester.afterAll = afterAll
+RuleTester.it = it
+RuleTester.itOnly = it.only
+RuleTester.describe = describe
+
+const valid = readFileSync(path.join(import.meta.dirname, '../../_jest/data/inquirer.txt'), 'utf8')
+  .split('\n')
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -22,20 +25,9 @@ const ruleTester = new RuleTester({
   },
 })
 
+// eslint-disable-next-line jest/require-hook
 ruleTester.run('syntax', syntaxRule, {
-  valid: [
-    'enum Values {}',
-    'for (const a in []) {}',
-    'for (const a of []) {}',
-    `
-      const values = {};
-      for (const a in values) {}
-    `,
-    `
-      const values = [];
-      for (const a of values) {}
-    `,
-  ],
+  valid,
   invalid: [
     {
       code: `

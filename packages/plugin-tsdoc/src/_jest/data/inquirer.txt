@@ -1,0 +1,192 @@
+import { _copyRight, exitMessage } from '../_helpers'
+import { _exit, Description, Input, terminalSize, theme } from '../_types'
+import { _commander } from './_commander'
+import { buildTemplates } from './buildTemplates'
+import { clean, configurationSort, converter, env as environment } from './configuration'
+import { bump, esLint, pub } from './project'
+import { projectTemplates } from './projectTemplates'
+import { select, Separator } from '@inquirer/prompts'
+
+class Inquirer {
+  /**
+   * Executes the inquirer interactive app in case arguments were not passed
+   */
+  async run () {
+    if (process.argv[2]) return
+    try {
+      const input = await this.#getInput()
+      await this.#executeScript(input)
+    } catch (error) {
+      if (error instanceof Error && error.name === 'ExitPromptError') {
+        exitMessage()
+      } else {
+        throw error
+      }
+    }
+  }
+
+  /**
+   * Presents the options to the user and returns the selected option to be executed
+   * @returns The selected input
+   */
+  async #getInput () {
+    const input = await select({
+      message: `${_copyRight()}.\n\nSelect a script:`,
+      theme,
+      choices: [
+        this.#separator('project'),
+        {
+          name:        'Bump',
+          value:       Input.BUMP,
+          description: Description.BUMP,
+        },
+        {
+          name:        'ESLint update',
+          value:       Input.ESLINT,
+          description: Description.ESLINT,
+        },
+        {
+          name:        'Publish to NPM',
+          value:       Input.PUB,
+          description: Description.PUB,
+        },
+        this.#separator('configuration'),
+        {
+          name:        'Clean',
+          value:       Input.CONFIG_CLEAN,
+          description: Description.CONFIG_CLEAN,
+        },
+        {
+          name:        'Copy local settings to release',
+          value:       Input.CONFIG_LOCAL_RELEASE,
+          description: Description.CONFIG_LOCAL_RELEASE,
+        },
+        {
+          name:        'Copy release to local settings',
+          value:       Input.CONFIG_RELEASE_LOCAL,
+          description: Description.CONFIG_RELEASE_LOCAL,
+        },
+        {
+          name:        'Sort',
+          value:       Input.CONFIG_SORT,
+          description: Description.CONFIG_SORT,
+        },
+        {
+          name:        'Extract Env Vars to Local Settings',
+          value:       Input.CONFIG_ENV_EXTRACT,
+          description: Description.CONFIG_ENV_EXTRACT,
+        },
+        this.#separator('template'),
+        {
+          name:        'Build',
+          value:       Input.TEMPLATE_BUILD,
+          description: Description.TEMPLATE_BUILD,
+        },
+        {
+          name:        'Project',
+          value:       Input.TEMPLATE_PROJECT,
+          description: Description.TEMPLATE_PROJECT,
+        },
+        this.#separator(),
+        {
+          name:        'Show Help',
+          value:       Input.HELP,
+          description: Description.HELP,
+          short:       'h',
+        },
+        _exit,
+        this.#separator(),
+      ],
+    })
+
+    return input
+  }
+
+  /**
+   * Executes the selected option
+   * @param input - User selected option
+   */
+  async #executeScript (input: Input) {
+    switch (input) {
+      case Input.BUMP: {
+        await bump.inquirer()
+        break
+      }
+      case Input.ESLINT: {
+        await esLint.inquirer()
+        break
+      }
+      case Input.PUB: {
+        await pub.inquirer()
+        break
+      }
+
+      case Input.CONFIG_CLEAN: {
+        clean.run()
+        break
+      }
+      case Input.CONFIG_LOCAL_RELEASE: {
+        converter.localSettingsToConfig('')
+        break
+      }
+      case Input.CONFIG_RELEASE_LOCAL: {
+        converter.configToLocalSettings('')
+        break
+      }
+      case Input.CONFIG_SORT: {
+        configurationSort('settings')
+        break
+      }
+      case Input.CONFIG_ENV_EXTRACT: {
+        environment.run()
+        break
+      }
+
+      case Input.TEMPLATE_BUILD: {
+        buildTemplates()
+        break
+      }
+      case Input.TEMPLATE_PROJECT: {
+        projectTemplates()
+        break
+      }
+
+      case Input.HELP: {
+        _commander.run(true)
+        break
+      }
+      case Input.EXIT: {
+        exitMessage()
+        break
+      }
+      default: {
+        break
+      }
+            // case 'helper':
+            //   helper()
+            //   break
+    }
+  }
+
+  /**
+   * Creates a separator with the padded text
+   * @param text - The text added to the separator
+   * @returns The separator with the padded text
+   */
+  #separator (text?: string) {
+    if (!text) {
+      return new Separator()
+    }
+    const textSize = text.length + 2
+    const after = Math.round((terminalSize - textSize) - 4)
+    const before = 4
+
+    const content = `${'-'.repeat(before)} ${text} ${'-'.repeat(after)}`
+    const separator = new Separator(content)
+
+    return separator
+  }
+}
+
+const _inquirer = new Inquirer()
+export { _inquirer }

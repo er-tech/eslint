@@ -357,7 +357,10 @@ export const lintErAll : Linter.RulesRecord = {
       ignore: [
         /doc/i,
         /dev/i,
+        /env/i,
+        /params?/i,
         /pro?d/i,
+        /re[q|s]/i,
       ],
     },
   ],
