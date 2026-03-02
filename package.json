@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "ER monorepo with ESLint packages",
   "scripts": {
-    "linterall:update": "npm run -w @er/linterall build",
-    "postinstall": "npm run linterall:update",
+    "build:linterall": "npm run -w @er/linterall build",
+    "build:plugin-tsdoc": "npm run -w @er/eslint-plugin-tsdoc build",
+    "postinstall": "npm run build:linterall",
     "lint": "eslint -c eslint.config.mjs packages/plugin-tsdoc/src/rules/syntax/syntax.ts"
   },
   "author": "Eduardo Russo",

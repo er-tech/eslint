@@ -15,7 +15,7 @@ newline-before-yield
 ## TSDoc Plugin
 https://github.com/eslint-community/eslint-plugin-rulesdir
 https://typescript-eslint.io/developers/eslint-plugins
-
+https://github.com/yarax/eslint-plugin-typelint/blob/master/rules/typelint.js
 
 ## Other plugins
 

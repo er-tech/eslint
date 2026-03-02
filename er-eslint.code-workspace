@@ -7,11 +7,13 @@
       // "dist": true,
 
       ".gitignore": true,
-      ".editorconfig": true,
+      // ".editorconfig": true,
       "package-lock.json": true,
       "typedoc.json": true,
+      // "eslint.config.mjs": true,
+      "LICENSE": true,
+      "tsconfig.*": true,
       // "jest.config.js": true,
-      // "tsconfig.*": true,
     },
     "cSpell.words": [
       "cjsx",
@@ -29,8 +31,8 @@
         "type": "node-terminal",
       },
       {
-        "name": "Self Updated",
-        "command": "npm run linterall:update",
+        "name": "Self Update LintErAll",
+        "command": "npm run build:linterall",
         "request": "launch",
         "type": "node-terminal",
       },

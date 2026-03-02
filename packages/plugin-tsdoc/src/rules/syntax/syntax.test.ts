@@ -1,15 +1,15 @@
+import { RuleTester } from '@typescript-eslint/rule-tester'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import tseslint from 'typescript-eslint'
-import { RuleTester } from '@typescript-eslint/rule-tester'
 import { syntaxRule } from './syntax'
-import { readFileSync } from 'node:fs'
 
 RuleTester.afterAll = afterAll
 RuleTester.it = it
 RuleTester.itOnly = it.only
 RuleTester.describe = describe
 
-const valid = readFileSync(path.join(import.meta.dirname, '../../_jest/data/inquirer.txt'), 'utf8')
+const valid = readFileSync(path.join(__dirname, '../../_jest/data/inquirer.txt'), 'utf8')
   .split('\n')
 
 const ruleTester = new RuleTester({

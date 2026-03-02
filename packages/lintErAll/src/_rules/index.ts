@@ -1,8 +1,8 @@
-import { lintErAll, lintErAllTest, standard } from './ts'
-import { json, jsonC5 } from './json'
-import { yaml } from './yaml'
 import { LintErAllRules } from '../_types'
+import { json, jsonC5 } from './json'
 import { markdown } from './markdown'
+import { lintErAll, lintErAllTest, standard } from './ts'
+import { yaml } from './yaml'
 
 /**
  * This file is used to export all the rules in a single object, so that they can be easily imported in the configs.

@@ -1,5 +1,5 @@
 /**
-  * Set of verb forms used to make functions description consistent accross the code. All functions should start with a verb, an action, to make it clear what they do and the whole project should follow the same voice (first or third).
+  * Set of verb forms used to make functions description consistent across the code. All functions should start with a verb, an action, to make it clear what they do and the whole project should follow the same voice (first or third).
   *
   * This registry contains a comprehensive list of `3,250` verb forms from the [giant verb list](https://patternbasedwriting.com/elementary_writing_success/giant-verb-list-3250-verbs/) and was transformed with the following rules:
   * 1: First/Second person

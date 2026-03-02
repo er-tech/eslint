@@ -1,4 +1,4 @@
-import { type ConfigWithExtendsArray, type ConfigWithExtends } from '@eslint/config-helpers'
+import { type ConfigWithExtends, type ConfigWithExtendsArray } from '@eslint/config-helpers'
 import { ConfigObject, RulesConfig } from '@eslint/core'
 
 export type SimpleExtendsElement = string | ConfigObject

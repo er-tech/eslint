@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "One lint config to rule them all",
   "scripts": {
-    "update": "node ./rollup/run.mjs",
+    "build": "tsc -p tsconfig.json",
     "test": "jest --collectCoverage"
   },
   "bin": {

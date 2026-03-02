@@ -1,3 +1,3 @@
 import path from 'node:path'
 
-export const $root = path.join(import.meta.dirname, '../../../..')
+export const $root = path.join(__dirname, '../../../..')

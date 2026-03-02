@@ -1,0 +1,11 @@
+import { Rule } from 'eslint'
+
+const context: Rule.RuleContext = {} as Rule.RuleContext
+export const getSourceCode =
+      typeof context.sourceCode === 'function'
+        ? () => {
+            return (context.sourceCode)
+          }
+        : () => {
+            return context.sourceCode
+          }

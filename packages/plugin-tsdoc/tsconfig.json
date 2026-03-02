@@ -4,14 +4,11 @@
     "rootDir": "./",
     "outDir": "../../dist/plugin-tsdoc",
 
-    "module": "preserve",
-    "moduleResolution": "bundler",
-
     "noEmit": false,
 
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": true,
-    "declarationMap": false,
+    "declarationMap": true,
     "emitDeclarationOnly": false
   }
 }
